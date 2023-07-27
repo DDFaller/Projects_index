@@ -45,7 +45,11 @@ Description: This was a delightful little project where I set out to render mult
 
 In this endeavor, I dived into the world of WebGL, eager to explore its possibilities. Although the project might seem simple in scope, it quickly became a playground of creativity and technical ingenuity.
 
-[Demonstration](https://youtube.com/shorts/Z4OwySX6u_Q)
+
+https://github.com/DDFaller/Projects_index/assets/49894740/a2fbf0be-1eec-4cf0-a045-61c836fe1f86
+
+
+
 ## Pathfinding algorithm
 
 Project Name: "AI Pathfinding"
