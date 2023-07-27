@@ -77,8 +77,6 @@ https://github.com/DDFaller/Projects_index/assets/49894740/883cbdb9-10f9-45c5-8b
 Projects: Battleship
  to be awed as the AI meticulously analyzes your moves, deduces your ship placements, and executes devastating attacks with precision. With each encounter, you'll find yourself devising cunning strategies to outmaneuver your AI rival, making every game a captivating and suspenseful experience.
 
-
-![Battleship_INTRO](https://github.com/DDFaller/Projects_index/assets/49894740/21688ae7-829b-4399-ac2d-2eba8cf49ea8)
 ![Strategies](https://github.com/DDFaller/Projects_index/assets/49894740/e5c860d5-0f87-4762-99c1-ce49d4c06c97)
 ![Score screen](https://github.com/DDFaller/Projects_index/assets/49894740/bed054f0-59aa-4adb-aab7-02d0b5e63fc3)
 
