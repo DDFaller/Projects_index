@@ -14,7 +14,7 @@ These projects exemplify innovation, creativity, and dedication, representing my
 
 📫 Contact: danielmfaller@hotmail.com
 
-➡️![Linkedin] (https://www.linkedin.com/in/daniel-machado-carneiro-faller-2b7545158/)
+🪪 Linkedin: https://www.linkedin.com/in/daniel-machado-carneiro-faller-2b7545158/
 
 ## Thesis 🎓
 
