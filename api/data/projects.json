@@ -1,5 +1,15 @@
 [
   {
+    "slug": "url-shortener-analytics",
+    "title": "URL Shortener and Redirect Analytics API",
+    "eyebrow": "Fast redirects + reliable click events",
+    "description": "A compact backend service that creates short links, handles expiration and disablement, and records privacy-conscious usage summaries.",
+    "technologies": ["Python", "FastAPI", "REST API", "Caching", "Rate Limiting"],
+    "categories": ["backend", "fullstack"],
+    "repo_url": "https://github.com/DDFaller/Projects_index",
+    "featured": true
+  },
+  {
     "slug": "faller-index-api",
     "title": "Faller / Index API",
     "eyebrow": "FastAPI catalogue + ranked search",

@@ -3,9 +3,10 @@
 Faller / Index is Daniel Faller's searchable engineering portfolio: a living
 catalogue of backend, fullstack, computer-vision, and visual-computing work.
 
-The repository is being remade in small vertical slices. The first slice adds
-a typed FastAPI catalogue and relevance-ranked search while keeping the static
-portfolio usable when the API is offline.
+The repository is being remade in small vertical slices. The backend now has a
+typed FastAPI catalogue, relevance-ranked search, and a compact URL shortener
+with redirect analytics, while the static portfolio remains usable when the
+API is offline.
 
 
 
@@ -42,6 +43,46 @@ project root as the root directory. Vercel detects the FastAPI application in
 
 The deployed catalogue will be available at `/api/v1/projects`, with API
 documentation at `/docs` and the health check at `/health`.
+
+The URL shortener endpoints are also available on the deployment:
+
+```bash
+curl -X POST https://your-domain.vercel.app/api/v1/short-links \
+  -H 'content-type: application/json' \
+  -d '{"target_url":"https://example.com","alias":"hello-1"}'
+curl -i https://your-domain.vercel.app/r/hello-1
+curl https://your-domain.vercel.app/api/v1/short-links/hello-1/stats
+```
+
+The demo uses in-memory storage and cache, so links are not durable across
+Vercel cold starts. PostgreSQL and Redis are the intended production adapters.
+
+## Backend observability
+
+The API exposes Prometheus metrics at `/metrics` and includes a preconfigured
+Grafana dashboard. For a local dashboard, start the API with `--host
+0.0.0.0`, then run:
+
+```bash
+docker compose -f observability/docker-compose.yml up -d
+```
+
+Open [Grafana](http://localhost:3000) to view redirect outcomes, request
+latency, HTTP status rates, link creation, and rate-limit pressure.
+
+For a public, zero-cost dashboard, create a Grafana Cloud Free stack and add
+the deployed metrics URL as a Metrics Endpoint scrape job:
+
+```text
+https://YOUR-VERCEL-DOMAIN.vercel.app/metrics
+```
+
+Import `observability/grafana/dashboards/faller-index.json`, create a
+read-only externally shared dashboard, and paste its URL into the
+`observability-dashboard-url` meta tag in `index.html`. The portfolio will
+then show an `Observability` link in its navigation. Grafana Cloud's Metrics
+Endpoint integration scrapes public Prometheus endpoints directly; the free
+tier has limited retention and active-series capacity.
 
 ## Portfolio modes
 

@@ -59,6 +59,16 @@ const portfolioModes = {
 
 const fallbackProjects = [
   {
+    slug: "url-shortener-analytics",
+    title: "URL Shortener and Redirect Analytics API",
+    eyebrow: "Fast redirects + reliable click events",
+    description: "A compact backend service that creates short links, handles expiration and disablement, and records privacy-conscious usage summaries.",
+    technologies: ["Python", "FastAPI", "REST API", "Caching", "Rate Limiting"],
+    categories: ["backend", "fullstack"],
+    repo_url: "https://github.com/DDFaller/Projects_index",
+    featured: true,
+  },
+  {
     slug: "faller-index-api",
     title: "Faller / Index API",
     eyebrow: "FastAPI catalogue + ranked search",
@@ -118,6 +128,7 @@ const projectSearch = document.querySelector("#project-search");
 const searchInput = document.querySelector("#project-query");
 const categorySelect = document.querySelector("#project-category");
 const projectStatus = document.querySelector("#project-status");
+const observabilityLink = document.querySelector("#observability-link");
 const modeElements = {
   hero: document.querySelector("#hero-focus"),
   kicker: document.querySelector("#portfolio-kicker"),
@@ -129,6 +140,13 @@ const params = new URLSearchParams(window.location.search);
 const requestedMode = params.get("portfolio") || params.get("mode") || params.get("") || "all";
 const normalizedMode = requestedMode.toLowerCase().trim().replaceAll("_", "-").replaceAll(" ", "-");
 const activeMode = portfolioModes[normalizedMode] || portfolioModes.all;
+
+function configureObservabilityLink() {
+  const dashboardUrl = document.querySelector('meta[name="observability-dashboard-url"]')?.content.trim();
+  if (!observabilityLink || !dashboardUrl || !dashboardUrl.startsWith("https://")) return;
+  observabilityLink.href = dashboardUrl;
+  observabilityLink.hidden = false;
+}
 
 function applyPortfolioMode() {
   modeElements.hero.textContent = activeMode.hero;
@@ -211,4 +229,5 @@ projectSearch.addEventListener("submit", (event) => {
 
 categorySelect.addEventListener("change", loadProjects);
 applyPortfolioMode();
+configureObservabilityLink();
 loadProjects();

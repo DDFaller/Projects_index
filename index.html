@@ -20,6 +20,8 @@
 
   <meta name="description" content="Faller / Index — a searchable catalogue of Daniel Faller's software engineering, fullstack, and computer-vision work.">
   <meta name="keywords" content="Daniel Faller, Faller Index, backend engineering, fullstack, computer vision, WebGL" />
+  <!-- Set this to the read-only Grafana Cloud dashboard URL after setup. -->
+  <meta name="observability-dashboard-url" content="" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -38,6 +40,9 @@
           </li>
           <li class="nav__item">
             <a href="#contact" class="nav__link">Contact</a>
+          </li>
+          <li class="nav__item">
+            <a id="observability-link" href="#" class="nav__link" target="_blank" rel="noreferrer" hidden>Observability</a>
           </li>
         </ul>
       </nav>
