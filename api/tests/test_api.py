@@ -61,7 +61,7 @@ def test_prometheus_metrics_endpoint_exposes_shortener_series() -> None:
 def test_projects_are_paginated() -> None:
     response = list_projects(page=1, page_size=2)
 
-    assert response.total == 7
+    assert response.total == 8
     assert len(response.results) == 2
     assert response.pages == 4
 

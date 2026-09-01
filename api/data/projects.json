@@ -30,6 +30,16 @@
     "featured": true
   },
   {
+    "slug": "faller-index-frontend",
+    "title": "Faller / Index Portfolio Frontend",
+    "eyebrow": "Responsive interface + local CMS preview",
+    "description": "A responsive React frontend that connects to project data, supports recruiter-friendly filters, and previews local content edits without a CMS account.",
+    "technologies": ["React", "Vite", "CSS", "Accessibility", "CMS Workflow"],
+    "categories": ["frontend", "fullstack"],
+    "repo_url": "https://github.com/DDFaller/faller-index-frontend",
+    "featured": true
+  },
+  {
     "slug": "rgb-d-object-detection",
     "title": "4-Channel Object Detection",
     "eyebrow": "YOLO + depth integration",
