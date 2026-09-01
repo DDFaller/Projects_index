@@ -61,9 +61,9 @@ def test_prometheus_metrics_endpoint_exposes_shortener_series() -> None:
 def test_projects_are_paginated() -> None:
     response = list_projects(page=1, page_size=2)
 
-    assert response.total == 6
+    assert response.total == 7
     assert len(response.results) == 2
-    assert response.pages == 3
+    assert response.pages == 4
 
 
 def test_search_ranks_title_and_technology_matches() -> None:

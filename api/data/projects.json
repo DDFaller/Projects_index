@@ -20,6 +20,16 @@
     "featured": true
   },
   {
+    "slug": "portfolio-api-search",
+    "title": "Portfolio API and Search Service",
+    "eyebrow": "Validated catalogue + ranked search",
+    "description": "A reproducible FastAPI service that persists portfolio projects, validates responses, and ranks filtered search results.",
+    "technologies": ["Python", "FastAPI", "SQLite", "OpenAPI", "Search"],
+    "categories": ["backend", "fullstack"],
+    "repo_url": "https://github.com/DDFaller/portfolio-api-search",
+    "featured": true
+  },
+  {
     "slug": "rgb-d-object-detection",
     "title": "4-Channel Object Detection",
     "eyebrow": "YOLO + depth integration",
