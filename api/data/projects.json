@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "rgb-d-object-detection",
+    "title": "4-Channel Object Detection",
+    "eyebrow": "YOLO + depth integration",
+    "description": "Modified an object-detection pipeline to process RGB images together with depth captured by an Azure Kinect sensor.",
+    "technologies": ["YOLO", "Computer Vision", "Azure Kinect"],
+    "categories": ["computer-vision", "machine-learning"],
+    "embed_url": "https://www.youtube.com/embed/GB_UXOOXPUo",
+    "demo_url": "https://youtube.com/shorts/GB_UXOOXPUo?feature=share",
+    "featured": true
+  },
+  {
+    "slug": "mdprognosys",
+    "title": "MDPrognosys",
+    "eyebrow": "Augmented reality in medicine",
+    "description": "Created an immersive medical visualisation experience using 3D tomography models and a Meta 2 augmented-reality device.",
+    "technologies": ["Augmented Reality", "3D Visualisation", "Healthcare"],
+    "categories": ["computer-graphics", "fullstack"],
+    "embed_url": "https://www.youtube.com/embed/mSjrowjVavk",
+    "demo_url": "https://www.youtube.com/watch?v=mSjrowjVavk",
+    "featured": true
+  },
+  {
+    "slug": "cloth-simulation",
+    "title": "Cloth Simulation",
+    "eyebrow": "Real-time 3D rendering",
+    "description": "Reproduced a real-time cloth-simulation paper as an interactive Three.js and WebGL demo.",
+    "technologies": ["Three.js", "WebGL", "3D Simulation"],
+    "categories": ["frontend", "computer-graphics"],
+    "embed_url": "https://ig-3-d-cloth-render.vercel.app/",
+    "demo_url": "https://ig-3-d-cloth-render.vercel.app/",
+    "featured": true
+  },
+  {
+    "slug": "sports-action-tracking-thesis",
+    "title": "Sports Action Tracking Thesis",
+    "eyebrow": "Tracking and action classification",
+    "description": "Studied how tracking applications can monitor and classify human actions in a sports context.",
+    "technologies": ["Data Analysis", "AI/ML", "Sports Tracking"],
+    "categories": ["machine-learning", "computer-vision"],
+    "image_url": "./images/tracking.jpg",
+    "demo_url": "https://github.com/DDFaller/Projects_index/assets/49894740/e85646e7-2bb5-4324-8861-cce8523a744e"
+  }
+]

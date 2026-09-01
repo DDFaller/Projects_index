@@ -16,10 +16,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
 
-  <title>Daniel Faller | Software Engineer Portfolio</title>
+  <title>Faller / Index | Daniel Faller</title>
 
-  <meta name="description" content="Showcasing the innovative projects and professional achievements of Daniel Faller, a Software Engineer from PUC-RIO.">
-  <meta name="keywords" content="Daniel Faller, Software Engineering, Web Development, Pathfinding, Augmented Reality, WebGL, AI" />
+  <meta name="description" content="Faller / Index — a searchable catalogue of Daniel Faller's software engineering, fullstack, and computer-vision work.">
+  <meta name="keywords" content="Daniel Faller, Faller Index, backend engineering, fullstack, computer vision, WebGL" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -30,10 +30,11 @@
   <header class="header" role="banner" id="top">
     <div class="row">
       <nav class="nav" role="navigation">
+        <a class="nav__brand" href="#top" aria-label="Faller / Index home">FALLER / INDEX</a>
         <ul class="nav__items">
-          <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+          <li class="nav__item"><a href="#projects" class="nav__link">Work</a></li>
           <li class="nav__item">
-            <a href="#about" class="nav__link">About</a>
+            <a href="#about" class="nav__link">Profile</a>
           </li>
           <li class="nav__item">
             <a href="#contact" class="nav__link">Contact</a>
@@ -46,138 +47,37 @@
         <h1 class="heading-primary">
           <span>Daniel Faller</span>
         </h1>
-        <p>Software Engineer</p>
-        <a href="#contact" class="btn btn--pink">Get in touch</a>
+        <p>Software engineer building reliable systems, useful data products, and computer-vision tools.</p>
+        <a href="#projects" class="btn btn--pink">Explore the index</a>
       </div>
     </div>
   </header>
 
   <main role="main">
 
-    <!-- ***** Projects ***** -->
+    <!-- ***** Project index ***** -->
 
     <section class="work" id="projects">
       <div class="row">
-        <h2>My Projects</h2>
-        <div class="work__boxes">
-
-
-           <div class="work__box">
-            <div class="work__image-box">
-              <iframe 
-                class="work__video"
-                src="https://www.youtube.com/embed/GB_UXOOXPUo"
-                title="Object Detection with Depth Channel"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="work__text">
-              <h3>4-Channel Object Detection</h3>
-              <h4>YOLO + Depth Integration</h4>
-              <p>
-                Developed an object detection algorithm by modifying YOLO to process images with four channels — the standard RGB plus a depth channel captured using an Azure Kinect sensor.
-              </p>
-              <ul class="work__list">
-                <li>YOLO Customization</li>
-                <li>Depth Data Integration</li>
-                <li>Computer Vision</li>
-              </ul>
-              <div class="work__links">
-                <a href="https://youtube.com/shorts/GB_UXOOXPUo?feature=share" target="_blank" class="link__text">
-                  Watch Video <span>&rarr;</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="work__box">
-            <div class="work__image-box">
-              <iframe 
-                class="work__video"
-                src="https://www.youtube.com/embed/mSjrowjVavk"
-                title="MDPrognosys - Augmented Reality in Medicine"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="work__text">
-              <h3>MDPrognosys</h3>
-              <h4>Augmented Reality in Medicine</h4>
-              <p>
-                Leveraging Meta 2 to create immersive 3D tomography models, aiding doctors in analyzing patient anatomy.
-              </p>
-              <ul class="work__list">
-                <li>Augmented Reality</li>
-                <li>3D Visualization</li>
-                <li>Healthcare</li>
-              </ul>
-              <p>
-                The report is in Portuguese.
-              </p>
-            </div>
-          </div>
-
-          <div class="work__box">
-            <div class="work__image-box">
-              <iframe 
-                class="work__video"
-                src="https://ig-3-d-cloth-render.vercel.app/"
-                title="Real-time Cloth Simulation Demo"
-                frameborder="0"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="work__text">
-              <h3>Cloth Simulation</h3>
-              <h4>Real-time 3D Rendering</h4>
-              <p>
-                Reproduced the paper <em>"Real-time cloth simulation with fiber level detail"</em>, implementing an interactive web demo in Three.js environment.
-              </p>
-               <p>
-                I recommend playing with the "Animate" section to view the app working, just enable the animation boxes one at a time.
-              </p>
-              <ul class="work__list">
-                <li>Three.js</li>
-                <li>WebGL</li>
-                <li>3D Simulation</li>
-              </ul>
-              <div class="work__links">
-                <a href="https://ig-3-d-cloth-render.vercel.app/" target="_blank" class="link__text">
-                  View Live Demo <span>&rarr;</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-
-           <div class="work__box">
-            <div class="work__image-box">
-                <img src="./images/tracking.jpg" class="work__image" alt="Project 1" />
-            </div>
-            <div class="work__text">
-              <h3>Thesis</h3>
-              <h4>Tracking Applications Classifying Human Actions</h4>
-              <p>
-                Using advanced technologies to monitor and classify human actions in sports, providing insights for athletes, coaches, and spectators.
-              </p>
-              <ul class="work__list">
-                <li>Data Analysis</li>
-                <li>AI/ML</li>
-                <li>Sports Tracking</li>
-              </ul>
-              <div class="work__links">
-                <a href="https://github.com/DDFaller/Projects_index/assets/49894740/e85646e7-2bb5-4324-8861-cce8523a744e" target="_blank" class="link__text">
-                  View Demo <span>&rarr;</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
+        <p class="section-kicker">01 / PROJECT CATALOGUE</p>
+        <h2>Selected work</h2>
+        <p class="section-intro">Search across experiments, interfaces, systems, and visual computing projects.</p>
+        <form class="project-toolbar" id="project-search" role="search">
+          <label class="sr-only" for="project-query">Search projects</label>
+          <input id="project-query" type="search" placeholder="Search by project or technology" autocomplete="off" />
+          <label class="sr-only" for="project-category">Filter by category</label>
+          <select id="project-category">
+            <option value="">All categories</option>
+            <option value="computer-vision">Computer vision</option>
+            <option value="computer-graphics">Computer graphics</option>
+            <option value="fullstack">Fullstack</option>
+            <option value="frontend">Frontend</option>
+            <option value="machine-learning">Machine learning</option>
+          </select>
+          <button class="btn btn--pink" type="submit">Search</button>
+        </form>
+        <p id="project-status" class="project-status" role="status" aria-live="polite">Loading the catalogue…</p>
+        <div class="work__boxes" id="project-grid" aria-live="polite"></div>
       </div>
     </section>
 
@@ -238,8 +138,8 @@
         <h2>About Me</h2>
         <div class="about__content">
           <div class="about__text">
-            <p>
-              Hi! I’m Daniel Faller, a post-graduate Software Engineering student at PUC-RIO with a background in Computer Science. With a passion for problem-solving and innovation, I’ve developed various projects in diverse areas including AI, AR, and Web Development.
+              <p>
+              Hi! I’m Daniel Faller, a post-graduate Software Engineering student at PUC-RIO with a background in Computer Science. Faller / Index is my living catalogue of work across backend engineering, fullstack development, AI, AR, and visual computing.
             </p>
             <a href="https://www.linkedin.com/in/daniel-m-faller/" class="btn">View LinkedIn</a>
           </div>
@@ -271,7 +171,7 @@
   <footer role="contentinfo" class="footer">
     <div class="row">
       <p>
-        &copy; 2024 Daniel Faller. All rights reserved.
+        &copy; 2026 Daniel Faller. Faller / Index.
       </p>
     </div>
   </footer>
@@ -279,6 +179,7 @@
   <a href="#top" class="back-to-top" title="Back to Top">
     <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image" />
   </a>
+  <script src="./app.js" defer></script>
 </body>
 
 </html>

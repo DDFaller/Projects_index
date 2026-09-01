@@ -1,8 +1,11 @@
-# My projects
-Greetings, everyone!
+# Faller / Index
 
-In this repository,I'm gonna present some remarkable projects undertaken during my time in university.
-These projects exemplify innovation, creativity, and dedication, representing my knowledge on various fields.
+Faller / Index is Daniel Faller's searchable engineering portfolio: a living
+catalogue of backend, fullstack, computer-vision, and visual-computing work.
+
+The repository is being remade in small vertical slices. The first slice adds
+a typed FastAPI catalogue and relevance-ranked search while keeping the static
+portfolio usable when the API is offline.
 
 
 
@@ -15,6 +18,30 @@ These projects exemplify innovation, creativity, and dedication, representing my
 📫 Contact: danielmfaller@hotmail.com
 
 🪪 Linkedin: https://www.linkedin.com/in/daniel-machado-carneiro-faller-2b7545158/
+
+## Run the catalogue API
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r api/requirements.txt
+uvicorn api.app:app --reload
+```
+
+Open `http://localhost:8000/docs` for the interactive API documentation. The
+portfolio frontend will use the live catalogue when served through the API;
+otherwise it falls back to its cached project data.
+
+## Deploy to Vercel
+
+The repository is prepared for Vercel's Python runtime. Push the repository to
+GitHub, import it at [vercel.com/new](https://vercel.com/new), and keep the
+project root as the root directory. Vercel detects the FastAPI application in
+`api/app.py` and installs the production dependencies from the root-level
+`requirements.txt`.
+
+The deployed catalogue will be available at `/api/v1/projects`, with API
+documentation at `/docs` and the health check at `/health`.
 
 ## Thesis 🎓
 
