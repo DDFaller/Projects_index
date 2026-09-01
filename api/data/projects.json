@@ -1,5 +1,15 @@
 [
   {
+    "slug": "faller-index-api",
+    "title": "Faller / Index API",
+    "eyebrow": "FastAPI catalogue + ranked search",
+    "description": "A versioned API that powers this searchable portfolio with validated project data and relevance-ranked queries.",
+    "technologies": ["Python", "FastAPI", "REST API", "Search"],
+    "categories": ["backend", "fullstack"],
+    "repo_url": "https://github.com/DDFaller/Projects_index",
+    "featured": true
+  },
+  {
     "slug": "rgb-d-object-detection",
     "title": "4-Channel Object Detection",
     "eyebrow": "YOLO + depth integration",

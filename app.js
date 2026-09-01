@@ -1,6 +1,73 @@
 const PROJECTS_API = window.FALLER_INDEX_API || "/api/v1/projects";
 
+const portfolioModes = {
+  all: {
+    label: "All work",
+    kicker: "01 / PROJECT CATALOGUE",
+    title: "Selected work",
+    intro: "Search across experiments, interfaces, systems, and visual computing projects.",
+    hero: "Software engineer building reliable systems, useful data products, and computer-vision tools.",
+    description: "Faller / Index — Daniel Faller's software engineering portfolio.",
+    categories: [],
+  },
+  backend: {
+    label: "Backend focus",
+    kicker: "01 / BACKEND SYSTEMS",
+    title: "Systems behind the interface",
+    intro: "APIs, search, data contracts, and the engineering decisions that make products dependable.",
+    hero: "Backend engineer building reliable APIs, search services, and production-minded systems.",
+    description: "Faller / Index — Daniel Faller's backend engineering portfolio.",
+    categories: ["backend", "fullstack"],
+  },
+  frontend: {
+    label: "Frontend focus",
+    kicker: "01 / FRONTEND EXPERIENCES",
+    title: "Interfaces with a point of view",
+    intro: "Responsive interfaces, accessible interactions, and visual systems connected to real project data.",
+    hero: "Frontend engineer building accessible interfaces for complex technical work.",
+    description: "Faller / Index — Daniel Faller's frontend engineering portfolio.",
+    categories: ["frontend", "fullstack"],
+  },
+  fullstack: {
+    label: "Fullstack focus",
+    kicker: "01 / FULLSTACK PRODUCTS",
+    title: "From data model to interface",
+    intro: "End-to-end products connecting thoughtful APIs, durable data, and clear user experiences.",
+    hero: "Fullstack engineer taking products from data model to polished interface.",
+    description: "Faller / Index — Daniel Faller's fullstack engineering portfolio.",
+    categories: ["fullstack", "frontend", "backend"],
+  },
+  "machine-learning": {
+    label: "Machine learning focus",
+    kicker: "01 / MACHINE LEARNING",
+    title: "Models connected to useful systems",
+    intro: "Computer-vision and machine-learning work presented with attention to inputs, outputs, and real use.",
+    hero: "Machine-learning engineer working across computer vision, tracking, and usable software.",
+    description: "Faller / Index — Daniel Faller's machine-learning portfolio.",
+    categories: ["machine-learning", "computer-vision"],
+  },
+  "computer-vision": {
+    label: "Computer vision focus",
+    kicker: "01 / COMPUTER VISION",
+    title: "Seeing systems differently",
+    intro: "Detection, tracking, depth, and visual computing projects with a path toward deployable tools.",
+    hero: "Computer-vision engineer building tools that connect visual data to useful action.",
+    description: "Faller / Index — Daniel Faller's computer-vision portfolio.",
+    categories: ["computer-vision", "machine-learning"],
+  },
+};
+
 const fallbackProjects = [
+  {
+    slug: "faller-index-api",
+    title: "Faller / Index API",
+    eyebrow: "FastAPI catalogue + ranked search",
+    description: "A versioned API that powers this searchable portfolio with validated project data and relevance-ranked queries.",
+    technologies: ["Python", "FastAPI", "REST API", "Search"],
+    categories: ["backend", "fullstack"],
+    repo_url: "https://github.com/DDFaller/Projects_index",
+    featured: true,
+  },
   {
     slug: "rgb-d-object-detection",
     title: "4-Channel Object Detection",
@@ -51,6 +118,30 @@ const projectSearch = document.querySelector("#project-search");
 const searchInput = document.querySelector("#project-query");
 const categorySelect = document.querySelector("#project-category");
 const projectStatus = document.querySelector("#project-status");
+const modeElements = {
+  hero: document.querySelector("#hero-focus"),
+  kicker: document.querySelector("#portfolio-kicker"),
+  title: document.querySelector("#portfolio-title"),
+  intro: document.querySelector("#portfolio-intro"),
+};
+
+const params = new URLSearchParams(window.location.search);
+const requestedMode = params.get("portfolio") || params.get("mode") || params.get("") || "all";
+const normalizedMode = requestedMode.toLowerCase().trim().replaceAll("_", "-").replaceAll(" ", "-");
+const activeMode = portfolioModes[normalizedMode] || portfolioModes.all;
+
+function applyPortfolioMode() {
+  modeElements.hero.textContent = activeMode.hero;
+  modeElements.kicker.textContent = activeMode.kicker;
+  modeElements.title.textContent = activeMode.title;
+  modeElements.intro.textContent = activeMode.intro;
+  document.title = `${activeMode.label} | Faller / Index`;
+  document.querySelector('meta[name="description"]').setAttribute("content", activeMode.description);
+}
+
+function projectMatchesMode(project) {
+  return !activeMode.categories.length || activeMode.categories.some((category) => project.categories.includes(category));
+}
 
 function escapeHtml(value) {
   return String(value)
@@ -71,9 +162,9 @@ function renderProjects(projects) {
     const media = project.embed_url
       ? `<iframe class="work__video" src="${escapeHtml(project.embed_url)}" title="${escapeHtml(project.title)}" loading="lazy" allowfullscreen></iframe>`
       : `<img class="work__image" src="${escapeHtml(project.image_url || "./images/header2.jpg")}" alt="${escapeHtml(project.title)} preview" loading="lazy" />`;
-    const link = project.demo_url
-      ? `<a href="${escapeHtml(project.demo_url)}" target="_blank" rel="noreferrer" class="link__text">View project <span>&rarr;</span></a>`
-      : "";
+    const links = [];
+    if (project.demo_url) links.push(`<a href="${escapeHtml(project.demo_url)}" target="_blank" rel="noreferrer" class="link__text">View project <span>&rarr;</span></a>`);
+    if (project.repo_url) links.push(`<a href="${escapeHtml(project.repo_url)}" target="_blank" rel="noreferrer" class="link__text">Repository <span>&rarr;</span></a>`);
 
     return `<article class="work__box project-card">
       <div class="work__image-box">${media}</div>
@@ -82,7 +173,7 @@ function renderProjects(projects) {
         <h3>${escapeHtml(project.title)}</h3>
         <p>${escapeHtml(project.description)}</p>
         <ul class="work__list">${project.technologies.map((technology) => `<li>${escapeHtml(technology)}</li>`).join("")}</ul>
-        <div class="work__links">${link}</div>
+        <div class="work__links">${links.join("")}</div>
       </div>
     </article>`;
   }).join("");
@@ -98,17 +189,18 @@ async function loadProjects() {
     const response = await fetch(`${PROJECTS_API}?${query.toString()}`);
     if (!response.ok) throw new Error(`API returned ${response.status}`);
     const payload = await response.json();
-    renderProjects(payload.results);
-    projectStatus.textContent = `${payload.total} project${payload.total === 1 ? "" : "s"} in the catalogue`;
+    const visibleProjects = payload.results.filter(projectMatchesMode);
+    renderProjects(visibleProjects);
+    projectStatus.textContent = `${visibleProjects.length} project${visibleProjects.length === 1 ? "" : "s"} · ${activeMode.label}`;
   } catch (error) {
     const queryValue = searchInput.value.trim().toLowerCase();
     const categoryValue = categorySelect.value;
     const visibleProjects = fallbackProjects.filter((project) => {
       const haystack = [project.title, project.eyebrow, project.description, ...project.technologies, ...project.categories].join(" ").toLowerCase();
-      return (!queryValue || haystack.includes(queryValue)) && (!categoryValue || project.categories.includes(categoryValue));
+      return projectMatchesMode(project) && (!queryValue || haystack.includes(queryValue)) && (!categoryValue || project.categories.includes(categoryValue));
     });
     renderProjects(visibleProjects);
-    projectStatus.textContent = "Showing cached catalogue data — start the API for live search.";
+    projectStatus.textContent = `Showing cached catalogue data · ${activeMode.label} — start the API for live search.`;
   }
 }
 
@@ -118,4 +210,5 @@ projectSearch.addEventListener("submit", (event) => {
 });
 
 categorySelect.addEventListener("change", loadProjects);
+applyPortfolioMode();
 loadProjects();

@@ -43,6 +43,20 @@ project root as the root directory. Vercel detects the FastAPI application in
 The deployed catalogue will be available at `/api/v1/projects`, with API
 documentation at `/docs` and the health check at `/health`.
 
+## Portfolio modes
+
+The same website can be shared with a role-specific focus by adding a query
+parameter:
+
+- `/?portfolio=backend`
+- `/?portfolio=frontend`
+- `/?portfolio=fullstack`
+- `/?portfolio=machine-learning`
+- `/?portfolio=computer-vision`
+
+Mode names are case-insensitive. The mode changes the hero copy, metadata, and
+visible project categories while preserving the same search and project URLs.
+
 ## Thesis 🎓
 
 Project Name: "Tracking Applications Classifying Human Actions in a Sports Context"

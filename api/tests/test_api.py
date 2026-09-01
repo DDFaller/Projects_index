@@ -13,9 +13,9 @@ def test_health_returns_service_metadata() -> None:
 def test_projects_are_paginated() -> None:
     response = list_projects(page=1, page_size=2)
 
-    assert response.total == 4
+    assert response.total == 5
     assert len(response.results) == 2
-    assert response.pages == 2
+    assert response.pages == 3
 
 
 def test_search_ranks_title_and_technology_matches() -> None:
