@@ -40,6 +40,16 @@
     "featured": true
   },
   {
+    "slug": "async-cv-inference",
+    "title": "Asynchronous Computer-Vision Inference Service",
+    "eyebrow": "Queue-backed detector + retry flow",
+    "description": "A reproducible FastAPI service that validates image jobs, processes them in a worker, prevents duplicate requests, and exposes safe results.",
+    "technologies": ["Python", "FastAPI", "Pillow", "SQLite", "Async Workers"],
+    "categories": ["computer-vision", "machine-learning", "backend"],
+    "repo_url": "https://github.com/DDFaller/async-cv-inference",
+    "featured": true
+  },
+  {
     "slug": "rgb-d-object-detection",
     "title": "4-Channel Object Detection",
     "eyebrow": "YOLO + depth integration",
