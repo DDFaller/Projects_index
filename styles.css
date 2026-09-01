@@ -9,6 +9,24 @@
     src: url('./fonts/HKGrotesk-Regular.woff') format('woff');
 }
 
+.privacy-page__content {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    max-width: 70rem;
+}
+
+.privacy-page__content h1 {
+    margin-bottom: 3rem;
+}
+
+.privacy-page__content h2 {
+    margin-top: 3rem;
+}
+
+.privacy-page__content p {
+    max-width: 70rem;
+}
+
 @font-face {
     font-family: 'Jost';
     font-style: normal;

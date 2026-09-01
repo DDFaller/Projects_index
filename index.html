@@ -20,9 +20,22 @@
 
   <meta name="description" content="Faller / Index — a searchable catalogue of Daniel Faller's software engineering, fullstack, and computer-vision work.">
   <meta name="keywords" content="Daniel Faller, Faller Index, backend engineering, fullstack, computer vision, WebGL" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <!-- Set this to the read-only Grafana Cloud dashboard URL after setup. -->
   <meta name="observability-dashboard-url" content="" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Vercel Web Analytics is enabled in the Vercel project settings. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    window.va('beforeSend', (event) => {
+      const url = new URL(event.url, window.location.origin);
+      url.search = '';
+      url.hash = '';
+      return { ...event, url: url.toString() };
+    });
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
@@ -179,6 +192,7 @@
       <p>
         &copy; 2026 Daniel Faller. Faller / Index.
       </p>
+      <p><a href="./privacy.html">Privacy</a></p>
     </div>
   </footer>
 

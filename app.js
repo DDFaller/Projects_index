@@ -141,6 +141,16 @@ const requestedMode = params.get("portfolio") || params.get("mode") || params.ge
 const normalizedMode = requestedMode.toLowerCase().trim().replaceAll("_", "-").replaceAll(" ", "-");
 const activeMode = portfolioModes[normalizedMode] || portfolioModes.all;
 
+function trackAnalyticsEvent(name, data = {}) {
+  if (typeof window.va !== "function") return;
+  window.va("event", { name, data });
+}
+
+function trackPortfolioMode() {
+  const mode = Object.hasOwn(portfolioModes, normalizedMode) ? normalizedMode : "all";
+  trackAnalyticsEvent("portfolio_mode_view", { mode });
+}
+
 function configureObservabilityLink() {
   const dashboardUrl = document.querySelector('meta[name="observability-dashboard-url"]')?.content.trim();
   if (!observabilityLink || !dashboardUrl || !dashboardUrl.startsWith("https://")) return;
@@ -181,10 +191,10 @@ function renderProjects(projects) {
       ? `<iframe class="work__video" src="${escapeHtml(project.embed_url)}" title="${escapeHtml(project.title)}" loading="lazy" allowfullscreen></iframe>`
       : `<img class="work__image" src="${escapeHtml(project.image_url || "./images/header2.jpg")}" alt="${escapeHtml(project.title)} preview" loading="lazy" />`;
     const links = [];
-    if (project.demo_url) links.push(`<a href="${escapeHtml(project.demo_url)}" target="_blank" rel="noreferrer" class="link__text">View project <span>&rarr;</span></a>`);
-    if (project.repo_url) links.push(`<a href="${escapeHtml(project.repo_url)}" target="_blank" rel="noreferrer" class="link__text">Repository <span>&rarr;</span></a>`);
+    if (project.demo_url) links.push(`<a href="${escapeHtml(project.demo_url)}" target="_blank" rel="noreferrer" class="link__text" data-analytics-destination="demo">View project <span>&rarr;</span></a>`);
+    if (project.repo_url) links.push(`<a href="${escapeHtml(project.repo_url)}" target="_blank" rel="noreferrer" class="link__text" data-analytics-destination="repo">Repository <span>&rarr;</span></a>`);
 
-    return `<article class="work__box project-card">
+    return `<article class="work__box project-card" data-analytics-project="${escapeHtml(project.slug)}">
       <div class="work__image-box">${media}</div>
       <div class="work__text">
         <p class="project-card__eyebrow">${escapeHtml(project.eyebrow)}</p>
@@ -224,10 +234,25 @@ async function loadProjects() {
 
 projectSearch.addEventListener("submit", (event) => {
   event.preventDefault();
+  trackAnalyticsEvent("project_search", {
+    has_query: Boolean(searchInput.value.trim()),
+    category: categorySelect.value || "all",
+  });
   loadProjects();
 });
 
 categorySelect.addEventListener("change", loadProjects);
+projectGrid.addEventListener("click", (event) => {
+  const link = event.target.closest("a[data-analytics-destination]");
+  if (!link) return;
+  const project = link.closest("[data-analytics-project]");
+  if (!project) return;
+  trackAnalyticsEvent("project_link_click", {
+    project: project.dataset.analyticsProject,
+    destination: link.dataset.analyticsDestination,
+  });
+});
 applyPortfolioMode();
 configureObservabilityLink();
+trackPortfolioMode();
 loadProjects();
