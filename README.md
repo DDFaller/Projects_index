@@ -57,18 +57,41 @@ curl https://your-domain.vercel.app/api/v1/short-links/hello-1/stats
 The demo uses in-memory storage and cache, so links are not durable across
 Vercel cold starts. PostgreSQL and Redis are the intended production adapters.
 
-## Backend observability
+## Portfolio analytics
 
-The API exposes Prometheus metrics at `/metrics` and includes a preconfigured
-Grafana dashboard. For a local dashboard, start the API with `--host
+The portfolio uses Vercel Web Analytics for aggregate page-view statistics.
+Enable Web Analytics in the Vercel project settings before deploying; the
+static integration in `index.html` loads Vercel's first-party script at
+`/_vercel/insights/script.js`.
+
+The frontend sends only these optional custom events (available according to
+the Vercel plan):
+
+- `portfolio_mode_view`: the selected portfolio mode.
+- `project_link_click`: project slug and `demo`/`repo` destination type.
+- `project_search`: whether a query exists and the selected category; the raw
+  search text is never sent.
+
+Analytics URLs are reduced to their path before transmission, and the custom
+events do not include IP addresses, cookies, email addresses, full external
+URLs, or persistent identifiers. See the site's [privacy notice](./privacy.html)
+for the visitor-facing explanation. Vercel's Web Analytics dashboard controls
+data access and retention according to the configured project plan.
+
+## Click shortener observability
+
+The API exposes Prometheus metrics at `/metrics` and includes a portfolio-ready
+Grafana Cloud dashboard for the click shortener. For a local dashboard, start
+the API with `--host
 0.0.0.0`, then run:
 
 ```bash
 docker compose -f observability/docker-compose.yml up -d
 ```
 
-Open [Grafana](http://localhost:3000) to view redirect outcomes, request
-latency, HTTP status rates, link creation, and rate-limit pressure.
+Open [Grafana](http://localhost:3000) to view the overview, user impact,
+request latency, redirect outcomes, HTTP status rates, and rate-limit pressure.
+The provisioned dashboard is `Faller / Index — Click Shortener`.
 
 For a public, zero-cost dashboard, create a Grafana Cloud Free stack and add
 the deployed metrics URL as a Metrics Endpoint scrape job:
@@ -77,12 +100,24 @@ the deployed metrics URL as a Metrics Endpoint scrape job:
 https://YOUR-VERCEL-DOMAIN.vercel.app/metrics
 ```
 
-Import `observability/grafana/dashboards/faller-index.json`, create a
-read-only externally shared dashboard, and paste its URL into the
-`observability-dashboard-url` meta tag in `index.html`. The portfolio will
-then show an `Observability` link in its navigation. Grafana Cloud's Metrics
-Endpoint integration scrapes public Prometheus endpoints directly; the free
-tier has limited retention and active-series capacity.
+The versioned Cloud resources live under
+`observability/grafana/resources/`: `faller-index` creates the `Faller / Index`
+folder and `faller-index-observability` publishes the existing dashboard UID.
+The dashboard's Prometheus variable is wired to the verified Cloud datasource
+UID `grafanacloud-prom`; the local provisioner continues to use its local
+Prometheus datasource by name. Publish with `gcx` after authenticating the
+`jovialviper387` context:
+
+```bash
+gcx --context jovialviper387 resources validate -p observability/grafana/resources
+gcx --context jovialviper387 resources push -p observability/grafana/resources
+```
+
+After creating a read-only public share in Grafana Cloud, paste its HTTPS URL
+into the `observability-dashboard-url` meta tag in `index.html`. The portfolio
+will then show an `Observability` link in its navigation. Grafana Cloud's
+Metrics Endpoint integration scrapes public Prometheus endpoints directly; the
+free tier has limited retention and active-series capacity.
 
 ## Portfolio modes
 

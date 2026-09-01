@@ -3,7 +3,9 @@ apiVersion: 1
 datasources:
   - name: Prometheus
     type: prometheus
-    uid: prometheus
+    # Keep the local provisioned UID aligned with Grafana Cloud so the same
+    # dashboard datasource variable works in both environments.
+    uid: grafanacloud-prom
     access: proxy
     url: http://prometheus:9090
     isDefault: true

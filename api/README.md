@@ -59,7 +59,7 @@ next production step is to replace `InMemoryLinkRepository` with PostgreSQL
 and `RedirectCache` with Redis; the route and response contracts do not need
 to change.
 
-## Grafana dashboard
+## Click shortener Grafana dashboard
 
 Start the API on a host address so the observability containers can scrape it:
 
@@ -69,19 +69,24 @@ docker compose -f observability/docker-compose.yml up -d
 ```
 
 Then open [Grafana](http://localhost:3000). The provisioned dashboard is
-called `Faller / Index — Backend Observability`; the default login is
+called `Faller / Index — Click Shortener`; the default login is
 `admin`/`admin`. Prometheus is available at [localhost:9090](http://localhost:9090).
 
-The dashboard shows link creation, active process-local links, redirect
-outcomes, p50/p95 request latency, HTTP status rates, and rate-limit pressure.
+The dashboard flows from overview to user impact, performance, and traffic. It
+shows link creation, active process-local links, redirect success, missing or
+inactive links, p50/p95 request latency, HTTP status rates, and rate-limit
+pressure. Its educational storage panel explains why Vercel cold starts reset
+the process-local demo state.
 The metrics endpoint should be protected or scraped privately before using
 this setup in production.
 
 For a public portfolio demo, use Grafana Cloud Free instead of the local
 containers: add the deployed `https://YOUR-VERCEL-DOMAIN.vercel.app/metrics`
-URL through Grafana Cloud's Metrics Endpoint integration, import
-`observability/grafana/dashboards/faller-index.json`, and share the dashboard
-externally as read-only. Paste the resulting URL into the
-`observability-dashboard-url` meta tag in `index.html` to enable the portfolio
-navigation link. Because the API uses process-local metrics, counters can
-reset when Vercel starts a new function instance.
+URL through Grafana Cloud's Metrics Endpoint integration, then publish the
+versioned resources in `observability/grafana/resources/` with `gcx`. The
+folder resource is `Faller / Index`; the dashboard resource preserves UID
+`faller-index-observability` and uses Cloud datasource UID `grafanacloud-prom`.
+Share the dashboard externally as read-only and paste the resulting HTTPS URL
+into the `observability-dashboard-url` meta tag in `index.html` to enable the
+portfolio navigation link. Because the API uses process-local metrics,
+counters can reset when Vercel starts a new function instance.
