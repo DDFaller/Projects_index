@@ -76,6 +76,7 @@ def test_category_filter_is_case_insensitive() -> None:
     response = list_projects(category="COMPUTER-VISION")
 
     assert {item.slug for item in response.results} == {
+        "async-cv-inference",
         "rgb-d-object-detection",
         "sports-action-tracking-thesis",
     }
