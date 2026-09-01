@@ -1,7 +1,7 @@
 import pytest
 from fastapi import HTTPException
 
-from api.app import get_project, health, list_projects
+from api.app import SITE_ROOT, get_project, health, list_projects, portfolio_home
 
 
 def test_health_returns_service_metadata() -> None:
@@ -38,3 +38,11 @@ def test_unknown_project_returns_not_found() -> None:
         get_project("not-a-real-project")
 
     assert error.value.status_code == 404
+
+
+def test_portfolio_home_points_to_existing_index() -> None:
+    response = portfolio_home()
+
+    assert response.path == SITE_ROOT / "index.html"
+    assert SITE_ROOT.joinpath("styles.css").exists()
+    assert SITE_ROOT.joinpath("app.js").exists()

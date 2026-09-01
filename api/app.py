@@ -14,10 +14,13 @@ from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 
 CATALOG_PATH = Path(__file__).parent / "data" / "projects.json"
+SITE_ROOT = Path(__file__).resolve().parent.parent
 
 
 class Project(BaseModel):
@@ -183,3 +186,27 @@ def get_project(slug: str) -> Project:
         if project.slug == slug:
             return project
     raise HTTPException(status_code=404, detail="Project not found")
+
+
+@app.get("/", include_in_schema=False)
+def portfolio_home() -> FileResponse:
+    """Serve the portfolio homepage from the same Vercel deployment."""
+
+    return FileResponse(SITE_ROOT / "index.html", media_type="text/html")
+
+
+@app.get("/styles.css", include_in_schema=False)
+def portfolio_styles() -> FileResponse:
+    """Serve the portfolio stylesheet when Vercel routes the request to FastAPI."""
+
+    return FileResponse(SITE_ROOT / "styles.css", media_type="text/css")
+
+
+@app.get("/app.js", include_in_schema=False)
+def portfolio_script() -> FileResponse:
+    """Serve the portfolio browser client."""
+
+    return FileResponse(SITE_ROOT / "app.js", media_type="application/javascript")
+
+
+app.mount("/images", StaticFiles(directory=SITE_ROOT / "images"), name="portfolio-images")

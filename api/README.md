@@ -17,6 +17,9 @@ uvicorn api.app:app --reload
 The API is available at `http://localhost:8000`. Interactive OpenAPI
 documentation is available at `http://localhost:8000/docs`.
 
+When running through Vercel, the same deployment also serves the portfolio
+homepage at `/`, its stylesheet and browser client, and the `/images` assets.
+
 ## Example requests
 
 ```bash
