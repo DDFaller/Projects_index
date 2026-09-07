@@ -2,9 +2,9 @@
   {
     "slug": "url-shortener-analytics",
     "title": "URL Shortener and Redirect Analytics API",
-    "eyebrow": "Fast redirects + reliable click events",
+    "eyebrow": "Fast redirects + Grafana observability",
     "description": "A compact backend service with a reproducible Grafana observability showcase for link creation, redirects, latency, errors, and rate limiting.",
-    "technologies": ["Python", "FastAPI", "REST API", "Caching", "Rate Limiting"],
+    "technologies": ["Python", "FastAPI", "Grafana", "Prometheus", "Docker", "Caching"],
     "categories": ["backend", "fullstack"],
     "repo_url": "https://github.com/DDFaller/click-shortener-grafana",
     "featured": true
